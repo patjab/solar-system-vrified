@@ -41,7 +41,7 @@ class App extends Component {
             this.props.isInArea ?
               <RoomContainer />
               :
-              <RoomContainer />
+              'Go away'
           }
       </div>
     );
