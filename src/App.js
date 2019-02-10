@@ -3,6 +3,13 @@ import logo from './logo.svg';
 import './styles/App.css';
 
 class App extends Component {
+  
+  constructor() {
+    this.state = {
+      rtc: undefined 
+    }
+  }
+
   render() {
     return (
       <div className="App">
