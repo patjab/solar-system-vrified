@@ -6,7 +6,7 @@ class Room extends Component {
   constructor(props) {
     super(props);
     this.gravitationalConstant = 0.00000000006673;
-    this.randomColor = [ 'red', 'orange', 'yellow', 'green', 'blue', 'violet'];
+    this.randomColor = [ 'red', 'orange', 'green', 'blue', 'violet'];
     this.state = {
       time: 0,
       planets: [
@@ -33,9 +33,9 @@ class Room extends Component {
       if ( e.key === 'p' ) {
         const newPlanet = {
           color: this.randomColor[Math.trunc(Math.random()*this.randomColor.length)],
-          radius: Math.random()*3,
+          radius: Math.random() * 5 + 2,
           startingPt: 0,
-          timeOffset: Math.random()+500000
+          timeOffset: Math.random() * 100
         };
         this.setState({ planets: [...this.state.planets, newPlanet ] }, () => { console.log(this.state.planets) })
       }
@@ -104,8 +104,8 @@ class Room extends Component {
                     />
                     {this.state.planets.map(planet => (
                       <a-entity id='planet'>
-                          <a-sphere radius="0.2" 
-                            color={planet.color} 
+                          <a-sphere radius="0.2"
+                            color={planet.color}
                             position={`${(planet.radius * Math.cos(this.state.time + planet.timeOffset)) + planet.startingPt} ${0} ${planet.radius * Math.sin(this.state.time + planet.timeOffset) + planet.startingPt}`}>
 
                           <a-animation
