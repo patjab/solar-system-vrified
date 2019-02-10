@@ -9,7 +9,7 @@
 }
 
 .App-header {
-  background-color: #282c34;
+  background-color: #161d28;
   min-height: 100vh;
   display: flex;
   flex-direction: column;
@@ -48,4 +48,9 @@
   width: 20vw;
   padding: 2vw;
   border-radius: 2em;
+}
+
+#room-image:hover {
+  opacity: 0.5;
+  outline: double;
 }
