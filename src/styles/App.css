@@ -4,7 +4,8 @@
 
 .App-logo {
   animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+  height: 25vmin;
+  filter: invert(100%);
 }
 
 .App-header {
@@ -13,9 +14,10 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
+  /* justify-content: center; */
   font-size: calc(10px + 2vmin);
   color: white;
+  padding-top: 15vh;
 }
 
 .App-link {
@@ -29,4 +31,21 @@
   to {
     transform: rotate(360deg);
   }
+}
+
+/* #room {
+  height: 45vh;
+  width: 25vw;
+  border: 8px;
+  border-color: white;
+  overflow: hidden;
+  justify-content: center;
+  padding: 0.5em;
+} */
+
+#room-image {
+  height: auto;
+  width: 20vw;
+  padding: 2vw;
+  border-radius: 2em;
 }
