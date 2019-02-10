@@ -5,5 +5,6 @@ This app is designed to educate users of the physics of space and the solar syst
  - ReactJS
  - NodeJS
  - Web Sockets
+ - Firebase
 
 Contributors: Patrick Abejar, Sammy Akharaz, Helen Liutongco, Angelina Wong
