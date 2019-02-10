@@ -20,7 +20,7 @@ class App extends Component {
       } else if ( this.props.isInArea && (!isValidLatitude || !isValidLongitude) ) {
         this.props.toggleIsInArea(false);
       }
-      
+
     };
 
     this.watchPositionRef = navigator.geolocation.watchPosition(success);
@@ -30,7 +30,7 @@ class App extends Component {
     navigator.geolocation.clearWatch(this.watchPositionRef);
   }
 
-  
+
 
   render() {
 
@@ -38,10 +38,10 @@ class App extends Component {
     return (
       <div className="App">
           {
-            this.props.isInArea ? 
+            this.props.isInArea ?
               <RoomContainer />
               :
-              'Go away'
+              <RoomContainer />
           }
       </div>
     );
@@ -55,7 +55,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { 
+  return {
     toggleIsInArea: (isInArea) => dispatch(toggleIsInArea(isInArea))
   }
 }

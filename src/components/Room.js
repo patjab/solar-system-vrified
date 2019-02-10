@@ -29,15 +29,21 @@ class Room extends Component {
   render() {
     const x = 2 * Math.cos(this.state.time);
     const z = 2 * Math.sin(this.state.time);
-    console.log(x)
+    // console.log(x)
 
     const x2 = 3 * Math.cos(this.state.time);
     const z2 = 3 * Math.sin(this.state.time);
 
     return (
       <a-scene>
-             <a-camera cursor position="0 0 0"></a-camera>
+             <a-camera cursor position="0 0 5"></a-camera>
              <a-sky color="black"></a-sky>
+             <a-entity position="-0.25 2.5 3"
+             text="anchor: right; width: 1.5; color: white; value: [KEPLER'S LAW OF ELLIPSES] All planets orbit the sun in a path that resembles an ellipse.">
+             </a-entity>
+             <a-entity position="0.25 2.5 3"
+               text="anchor: left; width: 1.5; color: white; value: [KEPLER'S LAW OF EQUAL AREAS] A planet moves fastest when it is closest to the sun and slowest when it is furthest from the sun.">
+             </a-entity>
              <a-entity id="sun">
                  <a-entity position="0 0 -5">
                      <a-entity id="earth">
