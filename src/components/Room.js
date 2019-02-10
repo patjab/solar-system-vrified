@@ -6,10 +6,11 @@ class Room extends Component {
     super(props);
     this.gravitationalConstant = 0.00000000006673;
     this.state = {
-      x: 100,
-      y: 0,
-      z: 0,
-      time: 0
+      time: 0,
+      planets: [
+        { color: 'red', radius: 2, startingPt: 0 },
+        { color: 'blue', radius: 3, startingPt: 0.9 }
+      ]
     };
     this.r = 5;
   }
@@ -24,23 +25,18 @@ class Room extends Component {
         time: this.state.time + 0.01
       });
     }, 30);
+
+
   }
 
   render() {
-    const x = 2 * Math.cos(this.state.time);
-    const z = 2 * Math.sin(this.state.time);
-    console.log(x)
-
-    const x2 = 3 * Math.cos(this.state.time);
-    const z2 = 3 * Math.sin(this.state.time);
-
     return (
       <a-scene>
-             <a-camera cursor position="0 0 0"></a-camera>
+             <a-camera cursor position="0 0 5"></a-camera>
              <a-sky color="black"></a-sky>
              <a-entity id="sun">
                  <a-entity position="0 0 -5">
-                     <a-entity id="earth">
+                     <a-entity id="sun">
                          <a-sphere radius="1"
                              position="0 0 0"
                              rotation="0 0 0"
@@ -53,38 +49,23 @@ class Room extends Component {
                              repeat="indefinite"></a-animation>
                      </a-entity>
 
-                     <a-entity id="planet">
-                         <a-sphere radius="0.2" color="blue" position={`${x} ${0} ${z}`}>
-                             <a-animation attributes="rotation"
-                                 to="0 360 0"
-                                 dur="4000"
-                                 easing="linear"
-                                 repeat="indefinite"></a-animation>
-                         </a-sphere>
-                         <a-animation attribute="rotation"
-                             to="0 360 0"
-                             dur="112000"
-                             easing="linear"
-                             repeat="indefinite"></a-animation>
-                     </a-entity>
-
-                     <a-entity id="planet2">
-                         <a-sphere radius="0.2" color="red" position={`${1.1*x2 + 0.9} ${0} ${1.1*z2}`}>
-                             <a-animation attributes="rotation"
-                                 to="0 360 0"
-                                 dur="4000"
-                                 easing="linear"
-                                 repeat="indefinite"></a-animation>
-                         </a-sphere>
-                         <a-animation attribute="rotation"
-                             to="0 360 0"
-                             dur="112000"
-                             easing="linear"
-                             repeat="indefinite"></a-animation>
-                     </a-entity>
-
-
-
+                    {
+                       this.state.planets.map(planet => (
+                       <a-entity id="planet">
+                          <a-sphere radius="0.2" color={planet.color} position={`${(planet.radius * Math.cos(this.state.time)) + planet.startingPt} ${0} ${planet.radius * Math.sin(this.state.time) + planet.startingPt}`}>
+                              <a-animation attributes="rotation"
+                                  to="0 360 0"
+                                  dur="4000"
+                                  easing="linear"
+                                  repeat="indefinite"></a-animation>
+                          </a-sphere>
+                          <a-animation attribute="rotation"
+                              to="0 360 0"
+                              dur="112000"
+                              easing="linear"
+                              repeat="indefinite"></a-animation>
+                        </a-entity>)) 
+                    }
                  </a-entity>
                  <a-animation attribute="rotation"
                      to="0 360 0"
