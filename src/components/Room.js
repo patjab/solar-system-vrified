@@ -1,4 +1,5 @@
-import React, { Component } from 'react';
+import React, { Component } from 'react'
+import { Button } from 'semantic-ui-react'
 
 class Room extends Component {
   constructor(props) {
@@ -11,15 +12,15 @@ class Room extends Component {
         { color: 'red', radius: 2, startingPt: 0, timeOffset: 0 },
         { color: 'blue', radius: 3, startingPt: 0.9, timeOffset: 0 }
       ]
-    };
-    this.r = 5;
+    }
+    this.r = 5
   }
 
   gravity = (m1, m2, r) => {
-    return (0.00000000006673 * m1 * m2)/Math.pow(r, 2);
+    return (0.00000000006673 * m1 * m2) / Math.pow(r, 2)
   }
 
-  componentDidMount() {
+  componentDidMount () {
     setInterval(() => {
       this.setState({
         time: this.state.time + 0.01
@@ -39,7 +40,7 @@ class Room extends Component {
     });
   }
 
-  render() {
+  render () {
     return (
       <a-scene>
              <a-camera cursor position="0 0 5"></a-camera>
@@ -88,4 +89,4 @@ class Room extends Component {
   }
 }
 
-export default Room;
+export default Room

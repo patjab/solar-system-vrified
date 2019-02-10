@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RoomContainer from './components/RoomContainer';
 import logo from './logo.svg';
 import './styles/App.css';
+import './styles/Room.css';
 import  { toggleIsInArea } from  './actions/actions';
 import { connect } from 'react-redux';
 
@@ -20,7 +21,7 @@ class App extends Component {
       } else if ( this.props.isInArea && (!isValidLatitude || !isValidLongitude) ) {
         this.props.toggleIsInArea(false);
       }
-      
+
     };
 
     this.watchPositionRef = navigator.geolocation.watchPosition(success);
@@ -30,19 +31,19 @@ class App extends Component {
     navigator.geolocation.clearWatch(this.watchPositionRef);
   }
 
-  
+
 
   render() {
 
     console.log(this.props.isInArea);
     return (
       <div className="App">
-          {
-            this.props.isInArea ? 
               <RoomContainer />
+          {/* {
+            this.props.isInArea ?
               :
               'Go away'
-          }
+          } */}
       </div>
     );
   }
@@ -55,7 +56,7 @@ const mapStateToProps = (state) => {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return { 
+  return {
     toggleIsInArea: (isInArea) => dispatch(toggleIsInArea(isInArea))
   }
 }
