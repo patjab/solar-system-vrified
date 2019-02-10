@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+// import Room from './components/Room.js';
 import logo from './logo.svg';
 import './styles/App.css';
 
@@ -7,18 +8,21 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Antu_kstars_solarsystem.svg/2000px-Antu_kstars_solarsystem.svg.png" className="App-logo" alt="logo" />
           <p>
-            Hack the Solar System Inital Repo
+            VRify the Solar System
           </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
+
+          <div id='room-list'>
+            <img id='room-image' src="https://cdn.cnn.com/cnnnext/dam/assets/190204103724-warped-milky-way-illustration-exlarge-169.jpg" />
+            <img id='room-image' src="https://cdn.cnn.com/cnnnext/dam/assets/190110215131-large-magellanic-cloud-exlarge-169.jpg" />
+            <img id='room-image' src="https://cdn.cnn.com/cnnnext/dam/assets/181213141308-comet-46p-wirtanen-exlarge-169.jpg" />
+            <img id='room-image' src="https://cdn.cnn.com/cnnnext/dam/assets/181128150031-wonders-of-the-universe-young-stars-exlarge-169.jpg" />
+          </div>
+
+
+
+
         </header>
       </div>
     );
