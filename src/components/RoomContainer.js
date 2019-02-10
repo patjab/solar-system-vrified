@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 class RoomContainer extends Component {
     render() {
         return (
-            this.props.currentRoom ? 
+            this.props.currentRoom ?
                 <Room currentRoom={this.props.currentRoom} />
             :
                 <RoomSelection/>
