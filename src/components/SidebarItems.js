@@ -6,7 +6,7 @@ class SidebarItems extends Component {
   render() {
     return (
       <>
-        <Menu.Item as='a' className="shape-btn" onClick={()=>{this.props.addPrimitive('sphere')}}>sphere</Menu.Item>
+        <Menu.Item as='a' className="shape-btn" onClick={this.props.addPlanet}>Add Planet</Menu.Item>
         <Menu.Item as='a' className="shape-btn" onClick={()=>{this.props.addPrimitive('box')}}>cube</Menu.Item>
         <Menu.Item as='a' className="shape-btn" onClick={()=>{this.props.addPrimitive('torus-knot')}}>torus knot</Menu.Item>
         <Menu.Item as='a' className="shape-btn" onClick={()=>{this.props.addPrimitive('plane')}}>plane</Menu.Item>
