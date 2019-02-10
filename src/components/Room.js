@@ -169,4 +169,4 @@ class Room extends Component {
   }
 }
 
-export default Room
+export default Room;
