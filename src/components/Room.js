@@ -1,17 +1,24 @@
 import React, { Component } from 'react'
 import { Button, Menu, Segment, Sidebar } from 'semantic-ui-react'
 import SidebarItems from './SidebarItems.js'
+import Sky from '../stars.png';
+import Sol from '../sol.jpg'
+import Jupiter from '../jupiter.jpg'
+import Neptune from '../neptuno.jpg'
+import Saturn from '../saturno.png'
+import Pluto from '../pluton.jpg'
+import Uranus from '../urano.jpg'
 
 class Room extends Component {
   constructor (props) {
     super(props)
     this.gravitationalConstant = 0.00000000006673
-    this.randomColor = ['red', 'orange', 'green', 'blue', 'violet']
+    this.randomColor = ["#jupiter", "#saturn", "#neptune", "#pluto", "#uranus"]
     this.state = {
       time: 0,
       planets: [
-        { color: 'red', radius: 2, startingPt: 0, timeOffset: 0 },
-        { color: 'blue', radius: 3, startingPt: 0.9, timeOffset: 0 }
+        { color: '#jupiter', radius: 2, startingPt: 0, timeOffset: 0 },
+        { color: '#neptune', radius: 3, startingPt: 0.9, timeOffset: 0 }
       ],
       visible: false
     }
@@ -46,7 +53,7 @@ class Room extends Component {
   }
 
   closeMenu = () => {
-    console.log('close menu', this.state.visible);
+    console.log('close menu', this.state.visible)
     if (this.state.visible) {
       this.toggleMenu()
     }
@@ -97,8 +104,19 @@ class Room extends Component {
               <span className='icon-bar' />
             </Button>
             <a-scene onClick={this.closeMenu}>
+              <a-assets>
+                <img id='sky' src={Sky} alt='start-bg' />
+                <img id='sun' src={Sol} alt='sun' />
+                <img id='jupiter' src={Jupiter} alt='jupiter' />
+                <img id='neptune' src={Neptune} alt='neptune' />
+                <img id='pluto' src={Pluto} alt='pluto' />
+                <img id='saturn' src={Saturn} alt='saturn' />
+                <img id='uranus' src={Uranus} alt='uranus' />
+
+              </a-assets>
               <a-camera cursor position='0 0 5' />
-              <a-sky color='black' />
+              <a-sky color='black'/>
+              <a-sphere id="sky" radius="100" position="0 0 0" rotation="0 90 0" src="#sky" color="#333333" material="side: double;"></a-sphere>
               <a-entity id='sun'>
                 <a-entity position='0 0 -5'>
                   <a-entity id='sun'>
@@ -107,6 +125,7 @@ class Room extends Component {
                       position='0 0 0'
                       rotation='0 0 0'
                       color='yellow'
+                      src="#sun"
                     />
                     <a-animation
                       attribute='rotation'
@@ -128,7 +147,7 @@ class Room extends Component {
                     <a-entity id='planet'>
                       <a-sphere
                         radius='0.2'
-                        color={planet.color}
+                        src={planet.color}
                         position={`${planet.radius *
                           Math.cos(this.state.time + planet.timeOffset) +
                           planet.startingPt} ${0} ${planet.radius *
@@ -169,4 +188,4 @@ class Room extends Component {
   }
 }
 
-export default Room;
+export default Room
