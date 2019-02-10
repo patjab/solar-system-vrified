@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import RoomContainer from './components/RoomContainer';
 import logo from './logo.svg';
 import './styles/App.css';
+import './styles/Room.css';
 import  { toggleIsInArea } from  './actions/actions';
 import { connect } from 'react-redux';
 
@@ -37,12 +38,12 @@ class App extends Component {
     console.log(this.props.isInArea);
     return (
       <div className="App">
-          {
-            this.props.isInArea ? 
               <RoomContainer />
+          {/* {
+            this.props.isInArea ? 
               :
               'Go away'
-          }
+          } */}
       </div>
     );
   }
