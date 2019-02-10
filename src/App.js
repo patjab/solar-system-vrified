@@ -9,7 +9,7 @@ class App extends Component {
         <header className="App-header">
           <img src={logo} className="App-logo" alt="logo" />
           <p>
-            Hack the Solor System Inital Repo
+            Hack the Solar System Inital Repo
           </p>
           <a
             className="App-link"
