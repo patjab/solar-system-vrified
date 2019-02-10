@@ -1,28 +1,25 @@
-import React, { Component } from 'react';
-import logo from './logo.svg';
-import './styles/App.css';
+import React, { Component } from 'react'
+import './styles/App.css'
+import { Route, Switch, withRouter } from 'react-router-dom'
+import Home from './components/home';
+import SolarSystem from './components/SolarSystem'
 
 class App extends Component {
-  render() {
+  render () {
     return (
-      <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <p>
-            Hack the Solar System Inital Repo
-          </p>
-          <a
-            className="App-link"
-            href="https://reactjs.org"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Learn React
-          </a>
-        </header>
-      </div>
-    );
+      <Switch>
+        <Route path='/' component={Home} />
+        <Route path='/solarsystem' component={SolarSystem} />
+        {/* <Route path="/signup" render={() => {
+            return (
+              <ImageFade />
+              // <p>placeholder for signup</p>
+              // <Signup />
+            )
+          }} /> */}
+      </Switch>
+    )
   }
 }
 
-export default App;
+export default withRouter(App)
