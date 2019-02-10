@@ -4,6 +4,6 @@ This app is designed to educate users of the physics of space and the solar syst
  - A-frame
  - ReactJS
  - NodeJS
- - WebRTC
+ - Web Sockets
 
 Contributors: Patrick Abejar, Sammy Akharaz, Helen Liutongco, Angelina Wong
