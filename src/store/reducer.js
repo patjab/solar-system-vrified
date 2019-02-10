@@ -1,5 +1,6 @@
 const initialState = {
     isInArea: false,
+    currentRoom: null,
     rtc: null
 }
 
@@ -10,8 +11,11 @@ export const reducer = (state = initialState, action) => {
                 ...state,
                 isInArea: action.payload
             }
-        case '':
-            return 
+        case 'SET_CURRENT_ROOM':
+            return {
+                ...state,
+                currentRoom: action.payload
+            }
         default:
             return state;
     }

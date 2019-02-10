@@ -15,9 +15,6 @@ class App extends Component {
       const isValidLatitude =  40.7814800 <= crd.latitude &&  40.781667899999995 >= crd.latitude;
       const isValidLongitude = -73.9734322 <= crd.longitude &&  -73.9731792 >= crd.longitude;
 
-      console.log(isValidLatitude)
-      console.log(isValidLongitude)
-
       if ( !this.props.isInArea && isValidLatitude && isValidLongitude ) {
         this.props.toggleIsInArea(true);
       } else if ( this.props.isInArea && (!isValidLatitude || !isValidLongitude) ) {
