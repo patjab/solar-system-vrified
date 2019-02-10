@@ -55,10 +55,10 @@ class Room extends Component {
                 repeat='indefinite'
               />
             </a-entity>
-            <a-entity position="-0.25 2.5 3"
+            <a-entity position="-0.25 1 8"
               text="anchor: right; width: 1.5; color: white; value: [KEPLER'S LAW OF ELLIPSES] All planets orbit the sun in a path that resembles an ellipse.">
             </a-entity>
-            <a-entity position="0.25 2.5 3"
+            <a-entity position="0.25 1 8"
               text="anchor: left; width: 1.5; color: white; value: [KEPLER'S LAW OF EQUAL AREAS] A planet moves fastest when it is closest to the sun and slowest when it is furthest from the sun.">
             </a-entity>
             {this.state.planets.map(planet => (
