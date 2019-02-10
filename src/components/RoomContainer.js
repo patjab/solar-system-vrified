@@ -1,13 +1,17 @@
 import React, { Component } from 'react';
+import RoomSelection from './RoomSelection';
+import Room from './Room';
+import { connect } from 'react-redux';
+
 
 class RoomContainer extends Component {
     render() {
-        {
+        return (
             this.props.currentRoom ? 
-                <Room />
+                <Room currentRoom={this.props.currentRoom} />
             :
                 <RoomSelection/>
-        }
+        );
     }
 }
 

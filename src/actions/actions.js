@@ -3,5 +3,5 @@ export const toggleIsInArea = (isInArea) => {
 }
 
 export const setCurrentRoom = (currentRoom) => {
-    return { type: 'SET_CURRENT_ROOM', payload: current };
+    return { type: 'SET_CURRENT_ROOM', payload: currentRoom };
 }
