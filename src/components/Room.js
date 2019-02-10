@@ -12,7 +12,7 @@ class Room extends Component {
       planets: [
         { color: 'red', radius: 2, startingPt: 0, timeOffset: 0 },
         { color: 'blue', radius: 3, startingPt: 0.9, timeOffset: 0 }
-      ]
+      ],
       visible: false
     }
     this.r = 5
