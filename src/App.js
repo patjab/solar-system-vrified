@@ -8,9 +8,13 @@ class App extends Component {
     return (
       <div className="App">
         <header className="App-header">
-          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Antu_kstars_solarsystem.svg/2000px-Antu_kstars_solarsystem.svg.png" className="App-logo" alt="logo" />
           <p>
             VRify the Solar System
+          </p>
+          <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6f/Antu_kstars_solarsystem.svg/2000px-Antu_kstars_solarsystem.svg.png" className="App-logo" alt="logo" />
+
+          <p>
+            Select Your Universe
           </p>
 
           <div id='room-list'>
