@@ -34,6 +34,10 @@
 .shape-btn{
   font-size: 14px;
 }
+.ui.inverted.icon.menu{
+  display: flex;
+  justify-content: center;
+}
 .ui.inverted.icon.menu .item.warning{
   color: rgb(255, 88, 88);
 }
