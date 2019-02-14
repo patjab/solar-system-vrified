@@ -1,63 +1,63 @@
-import React, { Component } from 'react'
-import { Button, Menu, Segment, Sidebar } from 'semantic-ui-react'
-import SidebarItems from './SidebarItems.js'
-import Sky from '../stars.png';
-import Sol from '../sol.jpg'
-import Jupiter from '../jupiter.jpg'
-import Neptune from '../neptuno.jpg'
-import Saturn from '../saturno.png'
-import Pluto from '../pluton.jpg'
-import Uranus from '../urano.jpg'
+import React, { Component } from "react";
+import { Button, Menu, Segment, Sidebar } from "semantic-ui-react";
+import SidebarItems from "./SidebarItems.js";
+import Sky from "../stars.png";
+import Sol from "../sol.jpg";
+import Jupiter from "../jupiter.jpg";
+import Neptune from "../neptuno.jpg";
+import Saturn from "../saturno.png";
+import Pluto from "../pluton.jpg";
+import Uranus from "../urano.jpg";
 
 class Room extends Component {
-  constructor (props) {
-    super(props)
-    this.gravitationalConstant = 0.00000000006673
-    this.randomColor = ["#jupiter", "#saturn", "#neptune", "#pluto", "#uranus"]
+  constructor(props) {
+    super(props);
+    this.gravitationalConstant = 0.00000000006673;
+    this.randomColor = ["#jupiter", "#saturn", "#neptune", "#pluto", "#uranus"];
     this.state = {
       time: 0,
       planets: [
-        { color: '#jupiter', radius: 2, startingPt: 0, timeOffset: 0 },
-        { color: '#neptune', radius: 3, startingPt: 0.9, timeOffset: 0 }
+        { color: "#jupiter", radius: 2, startingPt: 0, timeOffset: 0 },
+        { color: "#neptune", radius: 3, startingPt: 0.9, timeOffset: 0 }
       ],
       visible: false
-    }
-    this.r = 5
+    };
+    this.r = 5;
   }
 
   gravity = (m1, m2, r) => {
-    return (0.00000000006673 * m1 * m2) / Math.pow(r, 2)
-  }
+    return (0.00000000006673 * m1 * m2) / Math.pow(r, 2);
+  };
 
-  componentDidMount () {
+  componentDidMount() {
     setInterval(() => {
       this.setState({
         time: this.state.time + 0.01
-      })
-    }, 30)
+      });
+    }, 30);
 
-    window.addEventListener('keydown', e => {
-      if (e.key === 'p') {
-        this.addPlanet()
+    window.addEventListener("keydown", e => {
+      if (e.key === "p") {
+        this.addPlanet();
       }
-    })
+    });
 
-    window.addEventListener('onClick', e => {
-      console.log(e.target)
+    window.addEventListener("onClick", e => {
+      console.log(e.target);
       // if (e.target.className)
-    })
+    });
   }
 
   toggleMenu = () => {
-    this.setState({ visible: !this.state.visible })
-  }
+    this.setState({ visible: !this.state.visible });
+  };
 
   closeMenu = () => {
-    console.log('close menu', this.state.visible)
+    console.log("close menu", this.state.visible);
     if (this.state.visible) {
-      this.toggleMenu()
+      this.toggleMenu();
     }
-  }
+  };
 
   addPlanet = () => {
     const newPlanet = {
@@ -67,25 +67,25 @@ class Room extends Component {
       radius: Math.random() * 5 + 2,
       startingPt: 0,
       timeOffset: Math.random() * 100
-    }
+    };
     this.setState({ planets: [...this.state.planets, newPlanet] }, () => {
-      console.log(this.state.planets)
-    })
-  }
+      console.log(this.state.planets);
+    });
+  };
 
-  render () {
-    const { visible } = this.state
+  render() {
+    const { visible } = this.state;
     return (
       <Sidebar.Pushable as={Segment}>
         <Sidebar
           as={Menu}
-          animation='overlay'
-          icon='labeled'
+          animation="overlay"
+          icon="labeled"
           inverted
           onHide={this.handleSidebarHide}
           vertical
           visible={visible}
-          width='thin'
+          width="thin"
         >
           <SidebarItems
             addPrimitive={this.addPrimitive}
@@ -98,55 +98,62 @@ class Room extends Component {
         </Sidebar>
         <Sidebar.Pusher>
           <Segment basic>
-            <Button onClick={this.toggleMenu} className='scene-button'>
-              <span className='icon-bar' />
-              <span className='icon-bar' />
-              <span className='icon-bar' />
+            <Button onClick={this.toggleMenu} className="scene-button">
+              <span className="icon-bar" />
+              <span className="icon-bar" />
+              <span className="icon-bar" />
             </Button>
             <a-scene onClick={this.closeMenu}>
               <a-assets>
-                <img id='sky' src={Sky} alt='start-bg' />
-                <img id='sun' src={Sol} alt='sun' />
-                <img id='jupiter' src={Jupiter} alt='jupiter' />
-                <img id='neptune' src={Neptune} alt='neptune' />
-                <img id='pluto' src={Pluto} alt='pluto' />
-                <img id='saturn' src={Saturn} alt='saturn' />
-                <img id='uranus' src={Uranus} alt='uranus' />
-
+                <img id="sky" src={Sky} alt="start-bg" />
+                <img id="sun" src={Sol} alt="sun" />
+                <img id="jupiter" src={Jupiter} alt="jupiter" />
+                <img id="neptune" src={Neptune} alt="neptune" />
+                <img id="pluto" src={Pluto} alt="pluto" />
+                <img id="saturn" src={Saturn} alt="saturn" />
+                <img id="uranus" src={Uranus} alt="uranus" />
               </a-assets>
-              <a-camera cursor position='0 0 5' />
-              <a-sky color='black'/>
-              <a-sphere id="sky" radius="100" position="0 0 0" rotation="0 90 0" src="#sky" color="#333333" material="side: double;"></a-sphere>
-              <a-entity id='sun'>
-                <a-entity position='0 0 -5'>
-                  <a-entity id='sun'>
+              <a-camera cursor position="0 0 5" />
+              <a-sky color="black" />
+              <a-sphere
+                id="sky"
+                radius="100"
+                position="0 0 0"
+                rotation="0 90 0"
+                src="#sky"
+                color="#333333"
+                material="side: double;"
+              />
+              <a-entity id="sun">
+                <a-entity position="0 0 -5">
+                  <a-entity id="sun">
                     <a-sphere
-                      radius='1'
-                      position='0 0 0'
-                      rotation='0 0 0'
-                      color='yellow'
+                      radius="1"
+                      position="0 0 0"
+                      rotation="0 0 0"
+                      color="yellow"
                       src="#sun"
                     />
                     <a-animation
-                      attribute='rotation'
-                      to='0 360 0'
-                      dur='4000'
-                      easing='linear'
-                      repeat='indefinite'
+                      attribute="rotation"
+                      to="0 360 0"
+                      dur="4000"
+                      easing="linear"
+                      repeat="indefinite"
                     />
                   </a-entity>
                   <a-entity
-                    position='-0.25 1 8'
+                    position="-0.25 1 8"
                     text="anchor: right; width: 1.5; color: white; value: [KEPLER'S LAW OF ELLIPSES] All planets orbit the sun in a path that resembles an ellipse."
                   />
                   <a-entity
-                    position='0.25 1 8'
+                    position="0.25 1 8"
                     text="anchor: left; width: 1.5; color: white; value: [KEPLER'S LAW OF EQUAL AREAS] A planet moves fastest when it is closest to the sun and slowest when it is furthest from the sun."
                   />
                   {this.state.planets.map(planet => (
-                    <a-entity id='planet'>
+                    <a-entity id="planet">
                       <a-sphere
-                        radius='0.2'
+                        radius="0.2"
                         src={planet.color}
                         position={`${planet.radius *
                           Math.cos(this.state.time + planet.timeOffset) +
@@ -155,37 +162,37 @@ class Room extends Component {
                           planet.startingPt}`}
                       >
                         <a-animation
-                          attributes='rotation'
-                          to='0 360 0'
-                          dur='4000'
-                          easing='linear'
-                          repeat='indefinite'
+                          attributes="rotation"
+                          to="0 360 0"
+                          dur="4000"
+                          easing="linear"
+                          repeat="indefinite"
                         />
                       </a-sphere>
                       <a-animation
-                        attribute='rotation'
-                        to='0 360 0'
-                        dur='112000'
-                        easing='linear'
-                        repeat='indefinite'
+                        attribute="rotation"
+                        to="0 360 0"
+                        dur="112000"
+                        easing="linear"
+                        repeat="indefinite"
                       />
                     </a-entity>
                   ))}
                 </a-entity>
                 <a-animation
-                  attribute='rotation'
-                  to='0 360 0'
-                  dur='100000'
-                  easing='linear'
-                  repeat='indefinite'
+                  attribute="rotation"
+                  to="0 360 0"
+                  dur="100000"
+                  easing="linear"
+                  repeat="indefinite"
                 />
               </a-entity>
             </a-scene>
           </Segment>
         </Sidebar.Pusher>
       </Sidebar.Pushable>
-    )
+    );
   }
 }
 
-export default Room
+export default Room;
