@@ -47,12 +47,13 @@ class RoomSelection extends Component {
         </header>
         <div id="room-list">
           {this.rooms.map(room => (
-            <div className="room-image" key={room.id} onClick={() => this.props.setCurrentRoom(room.id)}>
+            <div
+              className="room-image"
+              key={room.id}
+              onClick={() => this.props.setCurrentRoom(room.id)}
+            >
               <h4>{room.name}</h4>
-              <img
-                src={room.imgSrc}
-                alt={room.name}
-              />
+              <img src={room.imgSrc} alt={room.name} />
             </div>
           ))}
         </div>
