@@ -45,7 +45,8 @@ body{
 .room-image {
   height: auto;
   width: 25vw;
-  padding: 0 1vw;
+  min-width: 320px;
+  padding: 1vw;
   border-radius: 2em;
   cursor: pointer;
   transition: opacity 500ms ease;
