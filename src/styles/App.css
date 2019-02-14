@@ -36,24 +36,27 @@ body{
   }
 }
 
-/* #room {
-  height: 45vh;
-  width: 25vw;
-  border: 8px;
-  border-color: white;
-  overflow: hidden;
+#room-list{
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  padding: 0.5em;
-} */
-
-#room-image {
-  height: auto;
-  width: 20vw;
-  padding: 2vw;
-  border-radius: 2em;
+  flex-direction: row;
 }
-
-#room-image:hover {
+.room-image {
+  height: auto;
+  width: 25vw;
+  padding: 0 1vw;
+  border-radius: 2em;
+  cursor: pointer;
+  transition: opacity 500ms ease;
+  opacity: 1;
+}
+.room-image:first-child{
+  padding-left: 0;
+}
+.room-image:last-child{
+  padding-right: 0;
+}
+.room-image:hover {
   opacity: 0.5;
-  outline: double;
 }

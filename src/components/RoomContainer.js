@@ -3,7 +3,6 @@ import RoomSelection from './RoomSelection';
 import Room from './Room';
 import { connect } from 'react-redux';
 
-
 class RoomContainer extends Component {
     render() {
         return (
