@@ -1,10 +1,9 @@
 import React, { Component } from 'react';
 import RoomContainer from './components/RoomContainer';
-import logo from './logo.svg';
-import './styles/App.css';
-import './styles/Room.css';
 import  { toggleIsInArea } from  './actions/actions';
 import { connect } from 'react-redux';
+import './styles/App.css';
+import './styles/Room.css';
 
 class App extends Component {
 
@@ -50,6 +49,7 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
+  console.log(state)
   return {
     isInArea: state.isInArea
   }
