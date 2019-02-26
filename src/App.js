@@ -10,8 +10,6 @@ class App extends Component {
   componentDidMount() {
     const success = (pos) => {
       const crd = pos.coords;
-
-      console.log(crd)
       const isValidLatitude =  40.7814800 <= crd.latitude &&  40.781667899999995 >= crd.latitude;
       const isValidLongitude = -73.9734322 <= crd.longitude &&  -73.9731792 >= crd.longitude;
 
@@ -33,8 +31,6 @@ class App extends Component {
 
 
   render() {
-
-    console.log(this.props.isInArea);
     return (
       <div className="App">
               <RoomContainer />
@@ -49,7 +45,6 @@ class App extends Component {
 }
 
 const mapStateToProps = (state) => {
-  console.log(state)
   return {
     isInArea: state.isInArea
   }

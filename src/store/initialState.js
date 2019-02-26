@@ -1,7 +1,9 @@
 const initialState = {
     isInArea: false,
     currentRoom: null,
-    planets: []
+    planets: [],
+
+    signalingConnection: null
 }
 
 export default initialState;

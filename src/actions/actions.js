@@ -9,3 +9,7 @@ export const setCurrentRoom = (currentRoom) => {
 export const addPlanet = (planet) => {
     return { type: 'ADD_PLANET', payload: planet };
 }
+
+export const setConnection = () => {
+    return { type: 'SET_CONNECTION' };
+}
