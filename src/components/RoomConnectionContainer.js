@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Room from './Room';
-import { sendOffer, sendAnswer } from '../actions/actions';
+import { sendOffer, sendAnswer, onJoin } from '../actions/actions';
 
 class RoomConnectionContainer extends React.Component {
 
@@ -34,11 +34,14 @@ class RoomConnectionContainer extends React.Component {
 
         this.dataChannel = this.myConnection.createDataChannel('myDataChannel', config);
 
-        console.log(this.myConnection.createOffer)
-        this.myConnection.createOffer(offer => {
-            this.myConnection.setLocalDescription(offer);
-            this.props.sendOffer(offer);
-        }, console.log);
+        this.props.onJoin();
+
+
+        // console.log(this.myConnection.createOffer)
+        // this.myConnection.createOffer(offer => {
+        //     this.myConnection.setLocalDescription(offer);
+        //     this.props.sendOffer(offer);
+        // }, console.log);
     }
 
     render() {
@@ -61,6 +64,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
+        onJoin: (roomName) => { dispatch(onJoin(roomName)) },
         sendOffer: (offer) => { dispatch(sendOffer(offer)) }
     }
 }

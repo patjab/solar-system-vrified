@@ -14,7 +14,8 @@ export default function serverConnectivityReducer(state = initialState.serverCon
         break;
     
     case `@@websocket/${ MESSAGE }`:
-        // Process the raw message here, either string, ArrayBuffer, or Blob
+        console.log('received message');
+        console.log(action);
         break;
     
     default: 
