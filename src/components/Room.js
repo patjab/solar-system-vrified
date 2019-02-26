@@ -13,7 +13,6 @@ class Room extends Component {
   constructor(props) {
     super(props);
     this.gravitationalConstant = 0.00000000006673;
-    this.randomColor = ["#jupiter", "#saturn", "#neptune", "#pluto", "#uranus"];
     this.state = {
       time: 0,
       visible: false
@@ -32,15 +31,10 @@ class Room extends Component {
       });
     }, 30);
 
-    window.addEventListener("keydown", e => {
-      if (e.key === "p") {
-        this.addPlanet();
+    window.addEventListener('keydown', e => {
+      if (e.key === 'p') {
+        this.props.addPlanet();
       }
-    });
-
-    window.addEventListener("onClick", e => {
-      console.log(e.target);
-      // if (e.target.className)
     });
   }
 
@@ -49,22 +43,9 @@ class Room extends Component {
   };
 
   closeMenu = () => {
-    console.log("close menu", this.state.visible);
     if (this.state.visible) {
       this.toggleMenu();
     }
-  };
-
-  addPlanet = () => {
-    const newPlanet = {
-      color: this.randomColor[
-        Math.trunc(Math.random() * this.randomColor.length)
-      ],
-      radius: Math.random() * 5 + 2,
-      startingPt: 0,
-      timeOffset: Math.random() * 100
-    };
-    this.props.addPlanet(newPlanet);
   };
 
   render() {
@@ -87,7 +68,7 @@ class Room extends Component {
             addText={this.addText}
             addText2={this.addText2}
             handleColorPicker={this.colorHandler}
-            addPlanet={this.addPlanet}
+            addPlanet={this.props.addPlanet}
           />
         </Sidebar>
         <Sidebar.Pusher>

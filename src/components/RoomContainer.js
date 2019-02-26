@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import RoomSelection from "./RoomSelection";
-import Room from "./Room";
+import RoomConnectionContainer from './RoomConnectionContainer';
 import { addPlanet } from '../actions/actions';
 import { connect } from "react-redux";
 
 class RoomContainer extends Component {
   render() {
     return this.props.currentRoom ? (
-      <Room 
+      <RoomConnectionContainer 
         currentRoom={this.props.currentRoom}
         planets={this.props.planets}
         addPlanet={this.props.addPlanet}
