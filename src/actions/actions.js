@@ -37,6 +37,17 @@ export const sendAnswer = (answer, roomName) => ({
     })
 });
 
+export const sendCandidate = (candidate, roomName) => ({
+    type: `@@websocket/${ SEND }`, 
+    payload: JSON.stringify({
+        type: 'candidate',
+        data: {
+            roomName,
+            candidate
+        }
+    })
+});
+
 export const onJoin = (roomName) => {
     return {
     type: `@@websocket/${ SEND }`, 

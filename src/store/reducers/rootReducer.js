@@ -5,7 +5,7 @@ import planetsReducer from './planetsReducer';
 import serverConnectivityReducer from './serverConnectivityReducer';
 import offerReducer from './offerReducer';
 import answerReducer from './answerReducer';
-
+import candidateReducer from './candidateReducer';
 
 const reducers = combineReducers({
     isInArea: locationReducer, 
@@ -13,7 +13,8 @@ const reducers = combineReducers({
     planets: planetsReducer,
     serverConnectivity: serverConnectivityReducer,
     offer: offerReducer,
-    answer: answerReducer
+    answer: answerReducer,
+    candidate: candidateReducer
 });
 
 export default reducers;

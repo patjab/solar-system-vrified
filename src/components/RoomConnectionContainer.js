@@ -1,7 +1,7 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import Room from './Room';
-import { sendOffer, sendAnswer, onJoin } from '../actions/actions';
+import { onJoin, sendOffer, sendAnswer, sendCandidate } from '../actions/actions';
 
 class RoomConnectionContainer extends React.Component {
 
@@ -17,13 +17,14 @@ class RoomConnectionContainer extends React.Component {
 
         this.myConnection.onicecandidate = (e) => {
             if ( e.candidate ) {
-                console.log("WOAH A CANDIDATE")
+                this.props.sendCandidate(e.candidate, this.props.currentRoom.name);
             }
         }
 
         this.myConnection.ondatachannel = (e) => {
+            console.log('RECEIVED A DATA CHANNEL RECEIVED A DATA CHANNEL RECEIVED A DATA CHANNEL RECEIVED A DATA CHANNEL ');
             e.channel.onmessage = (data) => {
-                console.log("WOAH A MESSAGE")
+                console.log('WOAH A MESSAGE', data);
             }
         }
     }
@@ -65,6 +66,11 @@ class RoomConnectionContainer extends React.Component {
             this.myConnection.setRemoteDescription(new RTCSessionDescription(this.props.answer));
             console.log('ANSWER', this.myConnection);
         }
+
+        if ( prevProps.candidate !== this.props.candidate && !!this.props.candidate ) {
+            this.myConnection.addIceCandidate(new RTCIceCandidate(this.props.candidate));
+            console.log('SUCCESSFULLY ADDED CANDIDATE');
+        }
     }
 
     render() {
@@ -81,7 +87,8 @@ class RoomConnectionContainer extends React.Component {
 const mapStateToProps = (state) => {
     return {
         offer: state.offer,
-        answer: state.answer
+        answer: state.answer,
+        candidate: state.candidate
     };
 };
 
@@ -90,6 +97,7 @@ const mapDispatchToProps = (dispatch) => {
         onJoin: (roomName) => { dispatch(onJoin(roomName)) },
         sendOffer: (offer, roomName) => { dispatch(sendOffer(offer, roomName)) },
         sendAnswer: (answer, roomName) => { dispatch(sendAnswer(answer, roomName)) },
+        sendCandidate: (candidate, roomName) => { dispatch(sendCandidate(candidate, roomName)) }
     }
 }
 

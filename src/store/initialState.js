@@ -5,7 +5,8 @@ const initialState = {
 
     serverConnectivity: {},
     offer: null,
-    answer: null
+    answer: null,
+    candidate: null
 }
 
 export default initialState;
