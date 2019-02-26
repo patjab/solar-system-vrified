@@ -1,6 +1,9 @@
 import rootReducer from './reducers/rootReducer';
-import { createStore } from 'redux';
+import { createStore, applyMiddleware } from 'redux';
+import ReduxWebSocketBridge from 'redux-websocket-bridge';
 
-const store = createStore(rootReducer);
+const createStoreWithMiddleware = applyMiddleware(
+        ReduxWebSocketBridge('ws://localhost:9090/')
+    )(createStore);
 
-export default store;
+export default createStoreWithMiddleware(rootReducer);
