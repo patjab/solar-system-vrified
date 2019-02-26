@@ -6,7 +6,7 @@ import { sendOffer, sendAnswer, onJoin } from '../actions/actions';
 class RoomConnectionContainer extends React.Component {
 
     componentDidMount() {
-        console.log('component did mount')
+        console.log(this.props.initialHandshake)
         const configuration = {
             iceServers: [
                 {
@@ -33,8 +33,7 @@ class RoomConnectionContainer extends React.Component {
         };
 
         this.dataChannel = this.myConnection.createDataChannel('myDataChannel', config);
-
-        this.props.onJoin();
+        this.props.onJoin(this.props.currentRoom.name);
 
 
         // console.log(this.myConnection.createOffer)
@@ -44,8 +43,11 @@ class RoomConnectionContainer extends React.Component {
         // }, console.log);
     }
 
+    componentDidUpdate() {
+        console.log(this.props.initialHandshake)
+    }
+
     render() {
-        console.log('rendering')
         return (
             <Room 
                 currentRoom={this.props.currentRoom}
@@ -58,7 +60,8 @@ class RoomConnectionContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        signalingConnection: state.signalingConnection
+        signalingConnection: state.signalingConnection,
+        initialHandshake: state.initialHandshake
     };
 };
 

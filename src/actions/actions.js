@@ -31,7 +31,8 @@ export const sendAnswer = (answer) => ({
     })
 });
 
-export const onJoin = (roomName) => ({
+export const onJoin = (roomName) => {
+    return {
     type: `@@websocket/${ SEND }`, 
     payload: JSON.stringify({
         type: 'join',
@@ -39,4 +40,4 @@ export const onJoin = (roomName) => ({
             roomName
         }
     })
-});
+}};
