@@ -15,19 +15,25 @@ export const addPlanet = (planet) => ({
     payload: planet
 });
 
-export const sendOffer = (offer) => ({ 
+export const sendOffer = (offer, roomName) => ({ 
     type: `@@websocket/${ SEND }`, 
     payload: JSON.stringify({
         type: 'offer',
-        data: offer
+        data: {
+            roomName,
+            offer
+        }
     })
 });
 
-export const sendAnswer = (answer) => ({
+export const sendAnswer = (answer, roomName) => ({
     type: `@@websocket/${ SEND }`, 
     payload: JSON.stringify({
         type: 'answer',
-        data: answer
+        data: {
+            roomName,
+            answer
+        }
     })
 });
 

@@ -5,8 +5,7 @@ import { sendOffer, sendAnswer, onJoin } from '../actions/actions';
 
 class RoomConnectionContainer extends React.Component {
 
-    componentDidMount() {
-        console.log(this.props.initialHandshake)
+    setupConnectionListeners = () => {
         const configuration = {
             iceServers: [
                 {
@@ -27,24 +26,45 @@ class RoomConnectionContainer extends React.Component {
                 console.log("WOAH A MESSAGE")
             }
         }
+    }
 
+    setupDataChannel = () => {
         const config = {
             reliable: true
         };
 
         this.dataChannel = this.myConnection.createDataChannel('myDataChannel', config);
         this.props.onJoin(this.props.currentRoom.name);
-
-
-        // console.log(this.myConnection.createOffer)
-        // this.myConnection.createOffer(offer => {
-        //     this.myConnection.setLocalDescription(offer);
-        //     this.props.sendOffer(offer);
-        // }, console.log);
     }
 
-    componentDidUpdate() {
-        console.log(this.props.initialHandshake)
+    componentDidMount() {
+        this.setupConnectionListeners();
+        this.setupDataChannel();
+    }
+
+    componentDidUpdate(prevProps) {
+        if ( prevProps.offer !== this.props.offer && this.props.offer === false ) {
+            console.log('change in offer, needs an offer');
+            this.myConnection.createOffer(offer => {
+                this.myConnection.setLocalDescription(offer);
+                this.props.sendOffer(offer, this.props.currentRoom.name);
+            }, console.log);
+        }
+
+        if ( prevProps.offer !== this.props.offer && this.props.offer !== false ) {
+            this.myConnection.setRemoteDescription(new RTCSessionDescription(this.props.offer));
+            console.log('setting offer, sending an answer');
+            
+            this.myConnection.createAnswer(answer => {
+                this.myConnection.setLocalDescription(answer);
+                this.props.sendAnswer(answer, this.props.currentRoom.name);
+            }, console.log);
+        }
+
+        if ( prevProps.answer !== this.props.answer && !!this.props.answer ) {
+            this.myConnection.setRemoteDescription(new RTCSessionDescription(this.props.answer));
+            console.log('ANSWER', this.myConnection);
+        }
     }
 
     render() {
@@ -60,15 +80,16 @@ class RoomConnectionContainer extends React.Component {
 
 const mapStateToProps = (state) => {
     return {
-        signalingConnection: state.signalingConnection,
-        initialHandshake: state.initialHandshake
+        offer: state.offer,
+        answer: state.answer
     };
 };
 
 const mapDispatchToProps = (dispatch) => {
     return {
         onJoin: (roomName) => { dispatch(onJoin(roomName)) },
-        sendOffer: (offer) => { dispatch(sendOffer(offer)) }
+        sendOffer: (offer, roomName) => { dispatch(sendOffer(offer, roomName)) },
+        sendAnswer: (answer, roomName) => { dispatch(sendAnswer(answer, roomName)) },
     }
 }
 

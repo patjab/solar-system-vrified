@@ -4,7 +4,8 @@ const initialState = {
     planets: [],
 
     serverConnectivity: {},
-    initialHandshake: null
+    offer: null,
+    answer: null
 }
 
 export default initialState;
