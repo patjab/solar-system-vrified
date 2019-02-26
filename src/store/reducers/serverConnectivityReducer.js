@@ -1,6 +1,7 @@
 import { OPEN, CLOSE, MESSAGE } from 'redux-websocket-bridge';
+import initialState from '../initialState';
  
-export default function serverConnectivityReducer(state = {}, action) {
+export default function serverConnectivityReducer(state = initialState.serverConnectivity, action) {
     console.log(action)
 
   switch (action.type) {

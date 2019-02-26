@@ -3,7 +3,7 @@ const initialState = {
     currentRoom: null,
     planets: [],
 
-    signalingConnection: null
+    serverConnectivity: {}
 }
 
 export default initialState;

@@ -1,17 +1,48 @@
-import * as React from 'react';
+import React from 'react';
 import { connect } from 'react-redux';
 import Room from './Room';
-import { setConnection } from '../actions/actions'
+import { sendOffer, sendAnswer } from '../actions/actions';
 
-class RTCContainer extends React.Component {
+class RoomConnectionContainer extends React.Component {
 
     componentDidMount() {
-        console.log(this.props.signalingConnection);
-        this.props.setConnection();
-        console.log(this.props.signalingConnection);
+        console.log('component did mount')
+        const configuration = {
+            iceServers: [
+                {
+                    url: 'stun:stun.1.google.com:19302'
+                }
+            ]
+        };
+        this.myConnection = new RTCPeerConnection(configuration);
+
+        this.myConnection.onicecandidate = (e) => {
+            if ( e.candidate ) {
+                console.log("WOAH A CANDIDATE")
+            }
+        }
+
+        this.myConnection.ondatachannel = (e) => {
+            e.channel.onmessage = (data) => {
+                console.log("WOAH A MESSAGE")
+            }
+        }
+
+        const config = {
+            reliable: true
+        };
+
+        this.dataChannel = this.myConnection.createDataChannel('myDataChannel', config);
+
+        console.log(this.myConnection.createOffer)
+        this.myConnection.createOffer(offer => {
+            this.myConnection.setLocalDescription(offer);
+            this.props.sendOffer(offer);
+        }, console.log);
     }
 
     render() {
+        console.log('rendering')
         return (
             <Room 
                 currentRoom={this.props.currentRoom}
@@ -30,8 +61,9 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
     return {
-        setConnection: () => dispatch(setConnection())
-    };
-};
+        sendOffer: (offer) => { dispatch(sendOffer(offer)) }
+    }
+}
 
-export default connect(mapStateToProps, mapDispatchToProps)(RTCContainer);
+
+export default connect(mapStateToProps, mapDispatchToProps)(RoomConnectionContainer);

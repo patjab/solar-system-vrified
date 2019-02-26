@@ -1,15 +1,32 @@
-export const toggleIsInArea = (isInArea) => {
-    return { type: 'TOGGLE_IS_IN_AREA', payload: isInArea };
-}
+import { SEND } from 'redux-websocket-bridge';
 
-export const setCurrentRoom = (currentRoom) => {
-    return { type: 'SET_CURRENT_ROOM', payload: currentRoom };
-}
+export const toggleIsInArea = (isInArea) => ({ 
+    type: 'TOGGLE_IS_IN_AREA', 
+    payload: isInArea
+});
 
-export const addPlanet = (planet) => {
-    return { type: 'ADD_PLANET', payload: planet };
-}
+export const setCurrentRoom = (currentRoom) => ({ 
+    type: 'SET_CURRENT_ROOM', 
+    payload: currentRoom 
+});
 
-export const setConnection = () => {
-    return { type: 'SET_CONNECTION' };
-}
+export const addPlanet = (planet) => ({
+    type: 'ADD_PLANET', 
+    payload: planet
+});
+
+export const sendOffer = (offer) => ({ 
+    type: `@@websocket/${ SEND }`, 
+    payload: JSON.stringify({
+        type: 'offer',
+        data: offer
+    })
+});
+
+export const sendAnswer = (answer) => ({
+    type: `@@websocket/${ SEND }`, 
+    payload: JSON.stringify({
+        type: 'answer',
+        data: answer
+    })
+});
