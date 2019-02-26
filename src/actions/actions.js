@@ -5,3 +5,7 @@ export const toggleIsInArea = (isInArea) => {
 export const setCurrentRoom = (currentRoom) => {
     return { type: 'SET_CURRENT_ROOM', payload: currentRoom };
 }
+
+export const addPlanet = (planet) => {
+    return { type: 'ADD_PLANET', payload: planet };
+}

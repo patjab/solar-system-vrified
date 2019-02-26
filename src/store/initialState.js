@@ -1,7 +1,7 @@
 const initialState = {
     isInArea: false,
     currentRoom: null,
-    rtc: null
+    planets: []
 }
 
 export default initialState;
