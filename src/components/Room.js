@@ -34,6 +34,13 @@ class Room extends Component {
     window.addEventListener('keydown', e => {
       if (e.key === 'p') {
         this.props.addPlanet();
+
+        const dataChannel = this.props.rtcDataChannel;
+        const planets = this.props.planets;
+
+        if ( dataChannel ) {
+          dataChannel.send(JSON.stringify(planets[planets.length-1]));
+        }
       }
     });
   }

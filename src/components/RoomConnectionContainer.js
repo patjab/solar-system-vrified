@@ -5,6 +5,13 @@ import { onJoin, sendOffer, sendAnswer, sendCandidate } from '../actions/actions
 
 class RoomConnectionContainer extends React.Component {
 
+    constructor(props) {
+        super(props);
+        this.state = {
+            rtcDataChannel: null
+        };
+    }
+
     setupConnectionListeners = () => {
         const configuration = {
             iceServers: [
@@ -23,9 +30,20 @@ class RoomConnectionContainer extends React.Component {
 
         this.myConnection.ondatachannel = (e) => {
             console.log('RECEIVED A DATA CHANNEL RECEIVED A DATA CHANNEL RECEIVED A DATA CHANNEL RECEIVED A DATA CHANNEL ');
-            e.channel.onmessage = (data) => {
-                console.log('WOAH A MESSAGE', data);
-            }
+
+            // TODO: Find middleware for this
+            this.setState({ rtcDataChannel: this.dataChannel }, () => {
+                e.channel.onmessage = (data) => {
+                    const receivedPlanet = JSON.parse(data.data);
+                    console.log('WOAH A PLANET', receivedPlanet);
+
+                    // MAKE PAYLOAD IN THIS FORMAT color, radius, stPt, timeOff 
+
+                    // TODO: Move this one level below
+                    this.props.addPlanet(receivedPlanet);
+                }
+            });
+
         }
     }
 
@@ -43,7 +61,7 @@ class RoomConnectionContainer extends React.Component {
         this.setupDataChannel();
     }
 
-    componentDidUpdate(prevProps) {
+    componentDidUpdate(prevProps, prevState) {
         if ( prevProps.offer !== this.props.offer && this.props.offer === false ) {
             console.log('change in offer, needs an offer');
             this.myConnection.createOffer(offer => {
@@ -79,6 +97,7 @@ class RoomConnectionContainer extends React.Component {
                 currentRoom={this.props.currentRoom}
                 planets={this.props.planets}
                 addPlanet={this.props.addPlanet}
+                rtcDataChannel={this.state.rtcDataChannel}
             />
         );
     }
