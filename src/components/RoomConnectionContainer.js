@@ -29,21 +29,14 @@ class RoomConnectionContainer extends React.Component {
         }
 
         this.myConnection.ondatachannel = (e) => {
-            console.log('RECEIVED A DATA CHANNEL RECEIVED A DATA CHANNEL RECEIVED A DATA CHANNEL RECEIVED A DATA CHANNEL ');
-
             // TODO: Find middleware for this
             this.setState({ rtcDataChannel: this.dataChannel }, () => {
                 e.channel.onmessage = (data) => {
                     const receivedPlanet = JSON.parse(data.data);
-                    console.log('WOAH A PLANET', receivedPlanet);
-
-                    // MAKE PAYLOAD IN THIS FORMAT color, radius, stPt, timeOff 
-
                     // TODO: Move this one level below
                     this.props.addPlanet(receivedPlanet);
                 }
             });
-
         }
     }
 
@@ -61,33 +54,42 @@ class RoomConnectionContainer extends React.Component {
         this.setupDataChannel();
     }
 
-    componentDidUpdate(prevProps, prevState) {
+    sendOffer = () => {
+        this.myConnection.createOffer(offer => {
+            this.myConnection.setLocalDescription(offer);
+            this.props.sendOffer(offer, this.props.currentRoom.name);
+        }, console.log);
+    }
+
+    receiveOfferSendAnswer = () => {
+        this.myConnection.setRemoteDescription(new RTCSessionDescription(this.props.offer));            
+        this.myConnection.createAnswer(answer => {
+            this.myConnection.setLocalDescription(answer);
+            this.props.sendAnswer(answer, this.props.currentRoom.name);
+        }, console.log);
+    }
+
+    receiveAnswer = () => {
+        this.myConnection.setRemoteDescription(new RTCSessionDescription(this.props.answer));
+    }
+
+    receiveIceCandidate = () => {
+        this.myConnection.addIceCandidate(new RTCIceCandidate(this.props.candidate));
+    }
+
+
+    componentDidUpdate(prevProps) {
         if ( prevProps.offer !== this.props.offer && this.props.offer === false ) {
-            console.log('change in offer, needs an offer');
-            this.myConnection.createOffer(offer => {
-                this.myConnection.setLocalDescription(offer);
-                this.props.sendOffer(offer, this.props.currentRoom.name);
-            }, console.log);
+            this.sendOffer();
         }
-
         if ( prevProps.offer !== this.props.offer && this.props.offer !== false ) {
-            this.myConnection.setRemoteDescription(new RTCSessionDescription(this.props.offer));
-            console.log('setting offer, sending an answer');
-            
-            this.myConnection.createAnswer(answer => {
-                this.myConnection.setLocalDescription(answer);
-                this.props.sendAnswer(answer, this.props.currentRoom.name);
-            }, console.log);
+            this.receiveOfferSendAnswer();
         }
-
         if ( prevProps.answer !== this.props.answer && !!this.props.answer ) {
-            this.myConnection.setRemoteDescription(new RTCSessionDescription(this.props.answer));
-            console.log('ANSWER', this.myConnection);
+            this.receiveAnswer();
         }
-
         if ( prevProps.candidate !== this.props.candidate && !!this.props.candidate ) {
-            this.myConnection.addIceCandidate(new RTCIceCandidate(this.props.candidate));
-            console.log('SUCCESSFULLY ADDED CANDIDATE');
+            this.receiveIceCandidate();
         }
     }
 
